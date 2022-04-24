@@ -1,90 +1,10 @@
 \documentclass[11pt]{article}
-
-% default packages
-\usepackage[english]{babel}
-\usepackage[letterpaper,margin=1in]{geometry}
-\usepackage{amsmath}
-\usepackage{graphicx}
-\usepackage[colorlinks=true, allcolors=blue]{hyperref}
-\usepackage[table]{xcolor}
-\usepackage{fullpage}
-\usepackage{titlesec}
-\usepackage{array}
-\usepackage{etoolbox, pdfpages}
-\patchcmd{\thebibliography}{\section *{\refname }}{\section{\refname}\label{sec:biblio}}{}{}
-\newcommand{\collabletter}[1]{\includepdf[pages=-, pagecommand={\thispagestyle{empty}\rfoot{\thepage}}]{#1}\clearpage}
-\pdfminorversion=7
-
-\setlength{\pdfpagewidth}{8.5in}
-\setlength{\pdfpageheight}{11in}
-\setlength{\parskip}{0pt}
-\titlespacing*{\section}{0pt}{0pt}{0pt}
-\titleformat{\section}{\normalfont\fontsize{11}{15}\bfseries}{\thesection}{1em}{}
-\setlength{\baselineskip}{13pt}
-
-\input{packages}
-
-\input{base/style}
+\usepackage[subpreambles=true]{standalone}
+\usepackage{import}
 
 \begin{document}
 
-% remove body header from first page
-\thispagestyle{empty}
-% header/footer just on cover page
-\AddToShipoutPicture*{\BackgroundPic}
-
-\input{base/coverpage}
-\clearpage
-\pagenumbering{arabic}
-
-\thispagestyle{fancy}
-% lengths need to be defined here or gets overwritten by \thispagestyle{empty} above
-\setlength{\headheight}{19.7478pt}
-\setlength{\headsep}{4pt}
-\newlength{\nsfoffset}
-\setlength{\nsfoffset}{\headheight}
-\addtolength{\nsfoffset}{\baselineskip}
-
-% to host your content
-\input{content}
-
-\clearpage
-
-% required appendices
-\appendix
-
-\includepdf[pages=1, pagecommand={\section{Biographical Sketch}\label{sec:biosketch}}, offset=0 -\nsfoffset]{\BioSketchFile}
-\includepdf[pages=2-, pagecommand={}, offset=0 -\headheight]{\BioSketchFile}
-\input{biosketch}
-\clearpage
-
-\includepdf[pages=1, pagecommand=\section{Current and Pending Support}\label{sec:support}, offset=0 -\nsfoffset]{\SupportFile}
-\includepdf[pages=2-, pagecommand={}, offset=0 -\headheight]{\SupportFile}
-\input{support}
-\clearpage
-
-%\input{biblio}
-\section{References}
-\printbibliography[heading=bibempty]
-\clearpage
-
-\section{Facilities and Other Resources}\label{sec:facilities}
-\input{facilities}
-
-\section{Equipment}\label{sec:equipment}
-\input{equipment}
-
-\section{Data Management Plan}\label{sec:dataplan}
-\input{dataplan}
-
-\section{Computational Resources}\label{sec:resources}
-\input{resources}
-
-\section{Recruitment and Retention of Students and early-stage Investigators}\label{sec:recruitment}
-\input{recruitment}
-
-\section{Other Attachments}\label{sec:other}
-\input{other}
+\import{./}{narrative-main}
+\import{./}{abstract-main}
 
 \end{document}
-
